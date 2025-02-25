@@ -17,7 +17,7 @@ const Footer = () => {
     { name: "Contact Us", path: "/contact" },
     { name: "Privacy Policy", path: "/privacy-policy" },
     { name: "Terms & Conditions", path: "/terms" },
-    { name: "FAQ", path: "/faq" },
+    { name: "FAQ", path: "/faqs" },
   ];
 
   const loanTypes = [

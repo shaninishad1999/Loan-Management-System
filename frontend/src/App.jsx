@@ -16,6 +16,14 @@ import BusinessLoan from "./loan/BusinessLoan";
 import PropertyLoan from "./loan/PropertyLoan";
 import PersonalLoan from "./loan/PersonalLoan";
 import Contact from "./components/Contact";
+import FAQs from "./pages/FAQs";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsCondition from "./pages/TermsCondition";
+import Documents from "./aboutmenu/Documents";
+import EducationLoan from "./loan/EducationLoan";
+import ProcessGuide from "./aboutmenu/ProceesGuide";
+import ForgotPassword from "./pages/ForgotPassword";
+import ApplyLoan from "./pages/ApplyLoan";
 
 
 
@@ -41,7 +49,18 @@ const App = () => {
         <Route path="property-loan" element={<PropertyLoan />} />
         <Route path="personal-loan" element={<PersonalLoan />} />
         <Route path="contact" element={<Contact />} />
-       
+        <Route path="faqs" element={<FAQs />} />
+        <Route path="privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="terms" element={<TermsCondition/>}/>
+        <Route path="documents" element={<Documents/>}/>
+        <Route path="education-loan" element={<EducationLoan/>}/>
+        <Route path="process" element={<ProcessGuide/>}/>
+        <Route path="register" element={<Register/>}/>
+        <Route path="login" element={<Login/>}/>
+        <Route path="forgot-password" element={<ForgotPassword/>}/>
+        <Route path="apply" element={<ApplyLoan/>}/>
+
+
 
       </Routes>
       <Footer />

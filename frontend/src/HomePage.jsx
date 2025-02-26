@@ -7,7 +7,7 @@ import HeroSection from "./section/HeroSection";
 const HomePage = () => {
   return (
     <>
-      <div className=" max-w-7xl mx-auto mt-20 space-y-20 ">
+      <div className=" max-w-7xl mx-auto lg:mt-20 md:mt-14 space-y-20 ">
         <HeroSection />
         <About />
         <HowToApply />

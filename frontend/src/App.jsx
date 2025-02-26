@@ -24,6 +24,11 @@ import EducationLoan from "./loan/EducationLoan";
 import ProcessGuide from "./aboutmenu/ProceesGuide";
 import ForgotPassword from "./pages/ForgotPassword";
 import ApplyLoan from "./pages/ApplyLoan";
+import UserDashboard from "./dashboard/UserDashboard";
+import Statement from "./pages/Statement";
+import PaymentMethod from "./pages/PaymentMethod";
+import Support from "./pages/Support";
+import UserAccount from "./pages/UserAccount";
 
 
 
@@ -37,10 +42,10 @@ const App = () => {
       </div>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/apply-loan" element={<LoanApplication />} />
+        {/* <Route path="/apply-loan" element={<LoanApplication />} /> */}
         <Route path="/emi" element={<Emi />} />
         <Route path="/emi-calculator" element={<EMICalculator />} />
         <Route path="/about" element={<About />} />
@@ -58,12 +63,26 @@ const App = () => {
         <Route path="register" element={<Register/>}/>
         <Route path="login" element={<Login/>}/>
         <Route path="forgot-password" element={<ForgotPassword/>}/>
-        <Route path="apply" element={<ApplyLoan/>}/>
+        <Route path="/apply-loan" element={<ApplyLoan/>}/>
+        <Route path="dashboard" element={<UserDashboard/>}/>
 
+        <Route path="/apply-loan" element={<ApplyLoan />} />
+        <Route path="/statement" element={<Statement />} />
+        <Route path="/payment-method" element={<PaymentMethod />} />
+        <Route path="/support" element={<Support />} />
 
+        <Route path="/myaccount" element={<UserAccount/>}/>
 
       </Routes>
       <Footer />
+
+      {/* <AuthProvider>
+      <div>
+        <h1>Welcome to My App</h1>
+        <Login />
+        <Register />
+      </div>
+    </AuthProvider> */}
     </div>
   );
 };

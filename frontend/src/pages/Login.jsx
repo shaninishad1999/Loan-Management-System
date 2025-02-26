@@ -1,17 +1,57 @@
 import React, { useState } from "react";
 import { FaUser, FaLock, FaGoogle, FaFacebook, FaApple, FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log("Login attempt with:", { email, password, rememberMe });
+    setError("");
+    setIsLoading(true);
+    
+    try {
+      // Call login API
+      const response = await axios.post("http://localhost:6050/api/users/login", {
+        email,
+        password
+      });
+      
+      console.log("Login successful:", response.data);
+      
+      // Store user data in localStorage
+      if (rememberMe) {
+        localStorage.setItem("user", JSON.stringify(response.data));
+      } else {
+        sessionStorage.setItem("user", JSON.stringify(response.data));
+      }
+      
+      // Store token for API calls
+      const token = response.data.token;
+      if (token) {
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      }
+      
+      // Redirect to dashboard
+      navigate("/dashboard");
+      
+    } catch (err) {
+      console.error("Login error:", err);
+      setError(
+        err.response?.data?.message || 
+        "Failed to login. Please check your credentials."
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -25,6 +65,12 @@ const Login = () => {
 
         {/* Login Form */}
         <div className="bg-gray-900 rounded-lg shadow-xl p-8">
+          {error && (
+            <div className="mb-4 p-3 bg-red-900/50 border border-red-700 text-red-200 rounded-md">
+              {error}
+            </div>
+          )}
+          
           <form onSubmit={handleSubmit}>
             {/* Email Field */}
             <div className="mb-6">
@@ -101,9 +147,10 @@ const Login = () => {
             {/* Login Button */}
             <button
               type="submit"
-              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              disabled={isLoading}
+              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-blue-800 disabled:opacity-70"
             >
-              Sign In
+              {isLoading ? "Signing In..." : "Sign In"}
             </button>
           </form>
 

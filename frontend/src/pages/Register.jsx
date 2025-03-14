@@ -197,10 +197,10 @@ const Register = () => {
             Your account has been created successfully.
           </p>
           <Link
-            to="/login"
+            to="/myaccount"
             className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md"
           >
-            Go to Login
+            Go to Profile
           </Link>
         </div>
       </div>

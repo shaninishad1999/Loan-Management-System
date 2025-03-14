@@ -27,21 +27,19 @@ const Login = () => {
       
       console.log("Login successful:", response.data);
       
-      // Store user data in localStorage
-      if (rememberMe) {
-        localStorage.setItem("user", JSON.stringify(response.data));
-      } else {
-        sessionStorage.setItem("user", JSON.stringify(response.data));
-      }
+      const { token, user } = response.data;
+    
+    if (token) {
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user)); // User data bhi store karein
+    }
+
       
-      // Store token for API calls
-      const token = response.data.token;
-      if (token) {
-        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      }
+     // API Requests ke liye Token Set karein
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       
       // Redirect to dashboard
-      navigate("/dashboard");
+      navigate("/myaccount");
       
     } catch (err) {
       console.error("Login error:", err);
